@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio | [Abdul Hasan]</title>
+    <title>Portofolio | Abdul Hasan</title>
     <!-- Google Fonts: Syne buat kesan edgy/modern, Inter buat teks profesional -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -213,31 +213,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 8px;
         }
         
         .profile-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Biar foto nggak peyang dan memenuhi kotak */
-            filter: grayscale(100%) contrast(1.2); /* Efek awal abu-abu & sedikit kontras ala rock */
-            transition: filter 0.5s ease;
+            object-fit: cover; /* Biar foto tidak peyang */
+            border-radius: 8px;
+            filter: grayscale(100%) contrast(1.2); /* Efek grayscale awal */
+            transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             z-index: 2;
         }
 
+        /* Hover efek transisi pada foto profil */
         .image-placeholder:hover .profile-img {
-            filter: grayscale(0%) contrast(1); /* Kembali berwarna saat di hover */
+            filter: grayscale(0%) contrast(1); /* Kembali berwarna */
+            transform: scale(1.03); /* Sedikit zoom elegan */
         }
 
-        /* Dekorasi ala kaset pita/amplifier (Border Merah di belakang foto) */
+        /* Dekorasi bingkai merah di belakang foto */
         .image-placeholder::before {
             content: '';
             position: absolute;
             top: 20px; left: -20px;
             width: 100%; height: 100%;
             border: 2px solid var(--accent-color);
-            z-index: 1; /* Pindah ke belakang foto */
-            transition: transform 0.3s;
+            border-radius: 8px;
+            z-index: 1; /* Di belakang foto */
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; /* Biar ga ngehalangin hover mouse ke foto */
         }
         .image-placeholder:hover::before {
             transform: translate(10px, -10px);
@@ -474,13 +480,13 @@
                 <h1 class="glitch-hover">Abdul Hasan</h1>
                 <h3>Web Developer & Problem Solver</h3>
                 <br>
-                <p>Mahasiswa yang tertarik dengan dunia teknologi dan musisi. Saua merancang dan membangun solusi digital yang efisien, elegan, dan fungsional. Selalu belajar hal baru mengikuti ritme perkembangan teknologi.</p>
+                <p>Mahasiswa yang tertarik dengan dunia teknologi dan musisi. Saya merancang dan membangun solusi digital yang efisien, elegan, dan fungsional. Selalu belajar hal baru mengikuti ritme perkembangan teknologi.</p>
                 <a href="#projects" class="btn" data-hover>Lihat Projek</a>
             </div>
             <div class="hero-image" data-hover>
                 <!-- Menambahkan gambar profil dengan tag img -->
-                <div class="image-placeholder" style="border: none; background: transparent;">
-                    <img src="foto profil.jpg" alt="Foto Profil Abdul Hasan" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; filter: grayscale(80%) contrast(1.2); transition: filter 0.5s ease;">
+                <div class="image-placeholder">
+                    <img class="profile-img" src="foto profil.jpg" alt="Foto Profil Abdul Hasan">
                 </div>
             </div>
         </div>
@@ -540,7 +546,7 @@
                 <!-- Project 2 (Diperbarui dengan gambar Excel) -->
                 <div class="project-card" data-hover>
                     <div class="project-img-placeholder" style="padding: 0; background: none;">
-                        <img src="Screenshot (56).PNG" alt="Projek 2 "> - Visualisasi Grafik Excel" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: opacity 0.5s, transform 0.5s;">
+                        <img src="Screenshot (56).png" alt="Projek 2 - Visualisasi Grafik Excel" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: opacity 0.5s, transform 0.5s;">
                     </div>
                     <div class="project-info">
                         <h3>Visualisasi Data Kereta</h3>
@@ -575,7 +581,7 @@
             <div class="contact-content">
                 <div class="contact-text">
                     <h3>Tertarik untuk bekerja sama?</h3>
-                    <p>Gw selalu terbuka untuk diskusi, proyek kolaborasi, atau sekadar ngobrol soal teknologi. Hubungi gw lewat form di samping atau melalui sosial media di bawah.</p>
+                    <p>Saya selalu terbuka untuk diskusi, proyek kolaborasi, atau sekadar ngobrol soal teknologi. Hubungi gw lewat form di samping atau melalui sosial media di bawah.</p>
                     <div class="social-links">
                         <a href="#" data-hover>LinkedIn</a>
                         <a href="#" data-hover>GitHub</a>
