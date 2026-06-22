@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | [Nama Lu]</title>
+    <!-- Google Fonts: Syne buat kesan edgy/modern, Inter buat teks profesional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ========================================== -->
+    <!-- BAGIAN CSS (Pindahkan isi tag ini ke style.css) -->
+    <!-- ========================================== -->
+    <style>
+        :root {
+            /* Tema Warna Alt Rock & Profesional */
+            --bg-color: #0a0a0a;
+            --surface-color: #161616;
+            --text-main: #f0f0f0;
+            --text-muted: #999999;
+            --accent-color: #e62e2d; /* Merah Crimson khas Rock */
+            --accent-glow: rgba(230, 46, 45, 0.3);
+            
+            /* Font */
+            --font-heading: 'Syne', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Kita pakai custom cursor */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Noise Overlay untuk efek "Grunge/Rock" tipis */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* --- KURSOR KUSTOM --- */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background-color: var(--accent-color);
+        }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+        .cursor-outline.hovering {
+            width: 60px; height: 60px;
+            background-color: var(--accent-glow);
+            border-color: var(--accent-color);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--text-main);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 0;
+            width: 40px; height: 4px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        .section-title:hover::after { width: 100%; }
+
+        /* Efek Glitch buat Hover Title */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: var(--accent-color);
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* --- LAYOUT UTAMA --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 8rem 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+        .logo span { color: var(--accent-color); }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- HERO / PROFIL SINGKAT --- */
+        #hero {
+            position: relative;
+        }
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+        .hero-text { flex: 1; }
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .image-placeholder {
+            width: 350px; height: 450px;
+            background-color: var(--surface-color);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Biar foto nggak peyang dan memenuhi kotak */
+            filter: grayscale(100%) contrast(1.2); /* Efek awal abu-abu & sedikit kontras ala rock */
+            transition: filter 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .image-placeholder:hover .profile-img {
+            filter: grayscale(0%) contrast(1); /* Kembali berwarna saat di hover */
+        }
+
+        /* Dekorasi ala kaset pita/amplifier (Border Merah di belakang foto) */
+        .image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 20px; left: -20px;
+            width: 100%; height: 100%;
+            border: 2px solid var(--accent-color);
+            z-index: 1; /* Pindah ke belakang foto */
+            transition: transform 0.3s;
+        }
+        .image-placeholder:hover::before {
+            transform: translate(10px, -10px);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            border: 1px solid var(--accent-color);
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: var(--accent-color);
+            transform: translateX(-101%);
+            transition: transform 0.3s cubic-bezier(0.7, 0, 0.3, 1);
+            z-index: -1;
+        }
+        .btn:hover { color: #fff; }
+        .btn:hover::before { transform: translateX(0); }
+
+        /* --- KEMAMPUAN / SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .skill-card {
+            background-color: var(--surface-color);
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+        /* Efek lampu neon di atas card */
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .skill-card:hover::after { opacity: 1; }
+        
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+        .skill-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- PROJEK / PROJECTS --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            position: relative;
+            background-color: var(--surface-color);
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+        }
+        .project-img-placeholder {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, #111, #222);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.1);
+            font-size: 2rem;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+        .project-card:hover .project-img-placeholder {
+            transform: scale(1.05);
+            opacity: 0.3;
+        }
+        .project-info {
+            position: relative;
+            z-index: 2;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s, opacity 0.4s;
+        }
+        .project-card:hover .project-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .project-info h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .project-info p { color: #ccc; margin-bottom: 1rem; }
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            background-color: rgba(230, 46, 45, 0.2);
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        /* --- KONTAK --- */
+        .contact-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+        }
+        .contact-text { flex: 1; }
+        .contact-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .contact-text p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .social-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        .social-links a:hover::after { width: 100%; }
+        
+        .contact-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--surface-color);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            transition: border-color 0.3s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        /* --- ANIMASI SCROLL REVEAL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column; text-align: center; }
+            .hero-image { justify-content: center; margin-top: 2rem; }
+            .image-placeholder { width: 100%; max-width: 350px; height: 350px; }
+            .hero-text h1 { font-size: 3rem; }
+            .contact-content { flex-direction: column; }
+            .nav-links { display: none; /* Bisa ditambahkan hamburger menu nanti */ }
+            section { padding: 6rem 0; min-height: auto; }
+            .cursor-dot, .cursor-outline { display: none; } /* Matikan kustom kursor di HP */
+            * { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Kursor Kustom (Diatur via JS) -->
+    <div class="cursor-dot" data-cursor></div>
+    <div class="cursor-outline" data-cursor></div>
+
+    <!-- Navigasi -->
+    <nav>
+        <div class="nav-content">
+            <a href="#hero" class="logo" data-hover>PORT<span>FOLIO</span></a>
+            <ul class="nav-links">
+                <li><a href="#hero" data-hover>Profil</a></li>
+                <li><a href="#skills" data-hover>Kemampuan</a></li>
+                <li><a href="#projects" data-hover>Projek</a></li>
+                <li><a href="#contact" data-hover>Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 1. Profil Singkat (Hero) -->
+    <section id="hero">
+        <div class="container hero-content reveal">
+            <div class="hero-text">
+                <h1 class="glitch-hover">Abdul Hasan</h1>
+                <h3>Web Developer & Problem Solver</h3>
+                <br>
+                <p>Mahasiswa yang tertarik dengan dunia teknologi. Gw merancang dan membangun solusi digital yang efisien, elegan, dan fungsional. Selalu belajar hal baru mengikuti ritme perkembangan teknologi.</p>
+                <a href="#projects" class="btn" data-hover>Lihat Projek</a>
+            </div>
+            <div class="hero-image" data-hover>
+                <!-- Menambahkan gambar profil dengan tag img -->
+                <div class="image-placeholder" style="border: none; background: transparent;">
+                    <img src="13318698828138067805.jpeg" alt="Foto Profil Abdul Hasan" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; filter: grayscale(80%) contrast(1.2); transition: filter 0.5s ease;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Kemampuan / Skills -->
+    <section id="skills">
+        <div class="container reveal">
+            <h2 class="section-title">Kemampuan</h2>
+            <div class="skills-grid">
+                <!-- Skill 1 -->
+                <div class="skill-card" data-hover>
+                    <h3>Problem Solving</h3>
+                    <p>Mampu menganalisis masalah kompleks menjadi bagian-bagian kecil yang dapat diselesaikan dengan pendekatan logis dan algoritmik.</p>
+                </div>
+                <!-- Skill 2 -->
+                <div class="skill-card" data-hover>
+                    <h3>Programming / Ngoding</h3>
+                    <p>Familiar dengan logika pemrograman dan bahasa seperti HTML, CSS, JavaScript, serta siap untuk belajar bahasa baru (C++, Python, dll).</p>
+                </div>
+                <!-- Skill 3 -->
+                <div class="skill-card" data-hover>
+                    <h3>Microsoft Office</h3>
+                    <p>Mahir menggunakan Word untuk dokumentasi rapi, Excel untuk pengolahan data/formula, dan PowerPoint untuk presentasi profesional.</p>
+                </div>
+                <!-- Skill 4 -->
+                <div class="skill-card" data-hover>
+                    <h3>Desain UI/UX (Basic)</h3>
+                    <p>Pemahaman dasar tentang tata letak, hierarki visual, dan tipografi untuk membuat tampilan aplikasi yang ramah pengguna.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Projek -->
+    <section id="projects">
+        <div class="container reveal">
+            <h2 class="section-title">Projek Gw</h2>
+            <div class="projects-grid">
+                
+                <!-- Project 1 (Diperbarui dengan gambar) -->
+                <div class="project-card" data-hover>
+                    <!-- Mengganti placeholder dengan tag img -->
+                    <div class="project-img-placeholder" style="padding: 0; background: none;">
+                        <img src="Screenshot 2026-06-22 192356.png" alt="Projek 1 - Kode HTML" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: opacity 0.5s, transform 0.5s;">
+                    </div>
+                    <div class="project-info">
+                        <h3>Web Portofolio</h3>
+                        <p>Membuat struktur dasar website portofolio menggunakan HTML dan CSS murni.</p>
+                        <div>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Diperbarui dengan gambar Excel) -->
+                <div class="project-card" data-hover>
+                    <div class="project-img-placeholder" style="padding: 0; background: none;">
+                        <img src="Screenshot (56).jpg" alt="Projek 2 - Visualisasi Grafik Excel" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: opacity 0.5s, transform 0.5s;">
+                    </div>
+                    <div class="project-info">
+                        <h3>Visualisasi Data Kereta</h3>
+                        <p>Mengolah data perjalanan kereta api dan membuat visualisasi grafik tren serta diagram lingkaran menggunakan Microsoft Excel.</p>
+                        <div>
+                            <span class="tag">MS Excel</span>
+                            <span class="tag">Data</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Placeholder 3 -->
+                <div class="project-card" data-hover>
+                    <div class="project-img-placeholder">[Gambar Projek 3]</div>
+                    <div class="project-info">
+                        <h3>Nama Projek 3</h3>
+                        <p>Placeholder untuk projek yang akan datang atau sedang dikerjakan saat ini di perkuliahan.</p>
+                        <div>
+                            <span class="tag">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Kontak -->
+    <section id="contact">
+        <div class="container reveal">
+            <h2 class="section-title">Mari Terhubung</h2>
+            <div class="contact-content">
+                <div class="contact-text">
+                    <h3>Tertarik untuk bekerja sama?</h3>
+                    <p>Gw selalu terbuka untuk diskusi, proyek kolaborasi, atau sekadar ngobrol soal teknologi. Hubungi gw lewat form di samping atau melalui sosial media di bawah.</p>
+                    <div class="social-links">
+                        <a href="#" data-hover>LinkedIn</a>
+                        <a href="#" data-hover>GitHub</a>
+                        <a href="#" data-hover>Instagram</a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <!-- Placeholder Form (Secara statis belum berfungsi kirim email sungguhan tanpa backend) -->
+                    <input type="text" placeholder="Nama Lu" data-hover>
+                    <input type="email" placeholder="Email Lu" data-hover>
+                    <textarea rows="4" placeholder="Pesan..." data-hover></textarea>
+                    <a href="#" class="btn" style="text-align: center;" data-hover>Kirim Pesan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- BAGIAN JAVASCRIPT (Pindahkan isi tag ini ke script.js) -->
+    <!-- ========================================== -->
+    <script>
+        // 1. KURSOR KUSTOM
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverElements = document.querySelectorAll('[data-hover]');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot mengikuti langsung
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline mengikuti dengan sedikit delay/animasi
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Efek saat kursor hover di atas elemen tertentu (tombol, link, dll)
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.classList.add('hovering');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.classList.remove('hovering');
+            });
+        });
+
+        // 2. ANIMASI SCROLL REVEAL
+        // Menggunakan Intersection Observer untuk menampilkan elemen saat di-scroll
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: stop observing after reveal
+                    // observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15, // Elemen muncul saat 15% bagiannya masuk ke layar
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+    </script>
+</body>
+</html>
